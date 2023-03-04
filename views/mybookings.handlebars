@@ -1,0 +1,78 @@
+<div class="container" style="background: #ccc; padding:0; margin:0;">
+    <div style="width: 40%; padding: 5px; ">
+    <img class="img-fluid" src="/img/shaambeauty-prospect.jpg" alt="SHAA'M Beauty"></img>
+    </div>
+
+    <div class="bg-white text-dark border rounded-sm p-4 mb-3" style="position:absolute;width: 55%; left:42%; top:26%; padding:0; margin:0;">
+		<h5 style="color: #0000AA; font-weight: bold;" class="text-center">Réservation pour une prestation à SHAA'M Beauty</h5><br>
+        <form action="/mybookings" method="POST">
+            <div class="form-group" style="margin:0; padding:0;">
+                <label style="font-weight: bold;" for="phoneNumber">Votre numéro de téléphone</label>
+                <input style="background: ghostwhite;" class="form-control" id="phoneNumber" name="phonenumber" onblur="getCustomerEMail()" type="phone" pattern="^((\+|00)[0-9]{2,3}[0-9]{1,2})*([0-9]{2}){4,5}$" placeholder="Entrez votre mobile" required>
+            </div>
+            <div class="form-group" style="margin:0; padding:0;">
+                <label style="font-weight: bold;" for="eMail">Votre adresse email</label>
+                <input style="background: ghostwhite;" class="form-control" id="eMail" name="email" onblur="getCustomerPhone()" type="email" placeholder="Entrez votre email" required>
+            </div>
+
+            <div style="margin:0; padding:0;">
+            <button class="btn btn-primary" type="submit">
+            Afficher
+            </button>
+            <a href="/home" class="btn btn-primary" style="margin:10px;" >
+            Annuler
+            </a>	
+            </div>
+
+        </form>
+    </div>
+</div>
+<script>
+    function getCustomerEMail() {
+        let phoneNum = $("#phoneNumber").val();
+        console.log("@@ Phone number got="+JSON.stringify(phoneNum));
+ 
+        if (phoneNum !== "") {
+           $.ajax({
+            type: "post",
+            url: "/getEmail",
+            data: JSON.stringify({ "phone": phoneNum}),
+            contentType: "application/json",
+            success: (result)=> {
+                console.log("@@ Response="+JSON.stringify(result));
+                if ($("#eMail").val() === "") {
+                    $("#eMail").val(result.email);
+                }
+            },
+            error: (result, status)=> {
+                console.log("@@ Result="+result);
+            }
+            });   
+        }     
+    }
+
+    function getCustomerPhone() {
+       let email = $("#eMail").val();
+        console.log("@@ EMail got="+JSON.stringify(email));
+ 
+        if (email !== "") {
+           $.ajax({
+            type: "post",
+            url: "/getPhoneNumber",
+            data: JSON.stringify({ "email": email}),
+            contentType: "application/json",
+            success: (result)=> {
+                console.log("@@ Response="+JSON.stringify(result));
+                //let phoneNum = $("#phoneNumber").val();
+                if ($("#phoneNumber").val() === "") {
+                    $("#phoneNumber").val(result.phonenumber);
+                }
+            },
+            error: (result, status)=> {
+                console.log("@@ Result="+result);
+            }
+            });   
+        }     
+    }
+
+</script>

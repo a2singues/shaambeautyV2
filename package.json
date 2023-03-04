@@ -1,0 +1,27 @@
+{
+  "name": "shaambeautyv2",
+  "version": "1.0.0",
+  "description": "The Shaa'm Breauty hairdressing salon booking application",
+  "main": "shaamb.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "shaambeauty-repo"
+  },
+  "author": "Assi Nguessan",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^4.6.2",
+    "bootstrap-datetime-picker": "^2.4.4",
+    "bootstrap-themes": "^1.0.2",
+    "cookie-parser": "^1.4.6",
+    "express": "^4.18.2",
+    "express-handlebars": "^6.0.7",
+    "express-session": "^1.17.3",
+    "jquery": "^3.6.3",
+    "moment": "^2.15.1",
+    "sqlite3": "^5.1.4"
+  }
+}

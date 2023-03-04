@@ -1,0 +1,87 @@
+<!--head>
+	<!-- link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" 
+	<link rel="stylesheet" href="/assets/css/3.3.7/bootstrap.min.css">
+	<script src="/assets/js/3.4.1/bootstrap.min.js"></script>
+</head -->
+
+<div class="container" style="padding-bottom:0.5px; width:100%; margin-top: 0%;">
+		<span style="margin-left:0%">
+			<span>
+				{{#if extImg}}
+					<a href="/showGalleryPrevious/{{imgnum}}" id="prevImage" class="btn btn-info btn-lg"><i class="fa fa-arrow-left"></i></a>
+				{{/if}}
+				<img class="img-fluid" style="height:690px;" src="/img/gallery/shaamb-{{imgnum}}.jpg" alt="SHAA'M Beauty"><h6 class="gallery-img">{{imgtxt}}</h6></img>
+				{{#if moreImg}}
+					<a href="/showGalleryNext/{{imgnum}}" id="nextImage" class="btn btn-info btn-lg"><i class="fa fa-arrow-right"></i></a>
+				{{/if}}
+			</span>
+
+			<!--span style="position:absolute: top:50%; left: 80%;" -->
+			<span>
+				<button id="showButton" type="button" class="btn btn-info" onclick="showVideo()" style="margin: 3%; padding:1%; display: inline;" disabled>Visite en vidéo</button>
+			</span>
+
+			<span id="divShowVideo" style="position:absolute; left:79%; top:24%; display:none;">
+				<div>
+				<span style="position:absolute; top:-22px; color:blue;">Visite en vidéo</span>
+				<video height="400" controls>Test
+					<source src="/videos/shaambeauty-review.mp4" type="video/mp4">
+					Visite vidéo du salon Shaam Beauty
+				</video>
+				</div>
+			</span>
+		<div style="position:absolute; left:70%; top:75%; background: #000; padding: 10px; border-radius:15px;">
+			<span>
+				<h3 style="font-weight:bold; color: orange;">SHAA'M Beauty Salon de coiffure</h3>
+				<h4 style="color:#ccc;">Au 114 Bouleavard François Mitterrand<br/>91160 Longjumeau</h4>
+			</span>
+		</div>
+		</span>
+</div>
+<script>
+	/*--- Page is ready ---*/
+	$(document).xxready(function() {
+	console.log("&& SHOW GALLERY ...");
+		event.preventDefault();
+		
+		var imgNum = $('#imgnum').val();
+		console.log("## imgNum-1="+imgNum);
+		if (imgNum)
+			imgNum++;
+		else
+			imgNum = 0;
+
+		console.log("## imgNum-1="+imgNum);
+		
+		$('#imgnum').val(imgNum);
+	});
+	
+	/*--- Display the next image ---*/
+	function nextImage() {
+		$("a#nextImage").attr("href", "/showGallery/"+$('#imgnum').val());
+	}
+
+    function showVideo(){
+       let showVideo = document.getElementById('divShowVideo');
+      	let showButton = document.getElementById('showButton');
+	   console.log("## Button value1="+showButton.innerHTML);
+
+	   if (showButton.innerHTML === 'Visite en vidéo') {
+	   		showVideo.style.display = "block";
+	   		showButton.innerHTML = "Fermer";
+	   }
+	   else {
+	   		showVideo.style.display = "none";
+	   		showButton.innerHTML = "Visite en vidéo";
+	   }
+	   //console.log("## Button value2="+showButton.value);
+	   //if (elem.value=="Close Curtain") elem.value = "Open Curtain";
+	   /*
+       let showVButton = document.getElementById('showButton');
+ 	   showVButton.style.display = "none";
+       let hideButton = document.getElementById('hideButton');
+ 	   hideButton.style.display = "block";
+		*/
+   }
+
+</script>
